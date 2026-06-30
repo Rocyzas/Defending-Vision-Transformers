@@ -106,7 +106,7 @@ os.makedirs(models_dir, exist_ok=True)
 
 # Training Loop (one model per augmentation)
 
-num_epochs = 1
+num_epochs = 25
 aug_p = 0.1
 
 for aug_name, aug_factory in AUGMENTATIONS.items():
