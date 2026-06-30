@@ -20,7 +20,7 @@ echo "[$(date '+%y-%m-%d %H:%M:%S')] Verify unzip..."
 ls -lh $SCRATCH
 
 echo "[$(date '+%y-%m-%d %H:%M:%S')] Starting training..."
-python3 ./src/Data_Augmented_Training_hybrid.py --data $SCRATCH/dataset.csv --models $OUTPUTS_DIR
+python3 ./src/Data_Augmented_Training_hybrid.py --data $SCRATCH/data/dataset.csv --models $OUTPUTS_DIR
 
 echo "[$(date '+%y-%m-%d %H:%M:%S')] Copy results to home directory..."
 cd $SCRATCH
