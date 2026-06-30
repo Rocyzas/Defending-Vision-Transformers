@@ -57,8 +57,10 @@ class ImageDataset(Dataset):
         # Read the stored absolute path and trim it to a repo-relative path
         # (keep the last 4 components: data/<split-dir>/<class>/<file>).
         abs_path = row['abs_path']
-        img_path = '/'.join(abs_path.split('/')[-4:])
+        # img_path = '/'.join(abs_path.split('/')[-4:])
+        img_path = '/'.join(abs_path.split('/')[-3:])
         # img_path = '../' + img_path
+        # print('--->', img_path)
         label_name = row['label']
 
         label = self.class_to_idx[label_name]
