@@ -4,6 +4,7 @@ import os
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 import sys
+import argparse
 # Run from repo root or src/; add repo root so `from src.model import ...` resolves.
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
@@ -53,7 +54,11 @@ class ImageDataset(Dataset):
 
     def __getitem__(self, idx):
         row = self.df.iloc[idx]
-        img_path = row['abs_path']
+        # Read the stored absolute path and trim it to a repo-relative path
+        # (keep the last 4 components: data/<split-dir>/<class>/<file>).
+        abs_path = row['abs_path']
+        img_path = '/'.join(abs_path.split('/')[-4:])
+        # img_path = '../' + img_path
         label_name = row['label']
 
         label = self.class_to_idx[label_name]
@@ -87,10 +92,15 @@ post_norm = [
 
 base_pipeline = pre_norm + post_norm
 
-# Anchor paths to this file's location so the script runs from any working directory.
-SRC_DIR = os.path.dirname(os.path.abspath(__file__))
-csv_path = os.path.join(SRC_DIR, '..', 'data', 'dataset.csv')
-models_dir = os.path.join(SRC_DIR, 'models_hybrid')
+parser = argparse.ArgumentParser(description="Augmented ViT training (hybrid).")
+parser.add_argument('--data', required=True,
+                    help="Path to the dataset CSV file.")
+parser.add_argument('--models', required=True,
+                    help="Directory where trained models are saved.")
+args = parser.parse_args()
+
+csv_path = args.data
+models_dir = args.models
 os.makedirs(models_dir, exist_ok=True)
 
 
