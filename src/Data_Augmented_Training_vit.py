@@ -18,7 +18,7 @@ import pandas as pd
 from tqdm import tqdm
 from datetime import datetime
 from torchvision import transforms
-from src.model import build_vit
+from src.model import *
 from src.augmentations import AUGMENTATIONS
 from torch.utils.tensorboard import SummaryWriter
 from torchmetrics.classification import MulticlassF1Score, MulticlassAccuracy, MulticlassPrecision, MulticlassRecall
@@ -90,13 +90,13 @@ base_pipeline = pre_norm + post_norm
 # Anchor paths to this file's location so the script runs from any working directory.
 SRC_DIR = os.path.dirname(os.path.abspath(__file__))
 csv_path = os.path.join(SRC_DIR, '..', 'data', 'dataset.csv')
-models_dir = os.path.join(SRC_DIR, 'models')
+models_dir = os.path.join(SRC_DIR, 'models_vit')
 os.makedirs(models_dir, exist_ok=True)
 
 
 # Training Loop (one model per augmentation)
 
-num_epochs = 25
+num_epochs = 1
 aug_p = 0.1
 
 for aug_name, aug_factory in AUGMENTATIONS.items():
@@ -116,7 +116,7 @@ for aug_name, aug_factory in AUGMENTATIONS.items():
     test_loader  = DataLoader(test_dataset,  batch_size=32, shuffle=False)
 
     num_classes = len(train_dataset.classes)
-    model = build_vit(num_classes=num_classes, img_size=image_size).to(device)
+    model = build_vit_base_patch16_224(num_classes=num_classes, img_size=image_size).to(device)
 
     optimiser = torch.optim.Adam(model.parameters(), lr=1e-4)
     criterion = nn.CrossEntropyLoss()
