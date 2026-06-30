@@ -11,6 +11,8 @@ set -e
 
 SCRATCH=/disk/scratch/$USER/$SLURM_JOB_ID
 OUTPUTS_DIR=$SCRATCH/outputs
+mkdir -p $SCRATCH
+mkdir -p $OUTPUTS_DIR
 
 echo "[$(date '+%y-%m-%d %H:%M:%S')] Unzipping dataset to scratch..."
 unzip -q ./data.zip -d $SCRATCH/
