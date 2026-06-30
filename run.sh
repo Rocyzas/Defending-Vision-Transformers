@@ -18,8 +18,11 @@ echo "[$(date '+%y-%m-%d %H:%M:%S')] Unzipping dataset to scratch..."
 unzip -q ./data.zip -d $SCRATCH/
 
 echo "[$(date '+%y-%m-%d %H:%M:%S')] Copying python file to scratch..."
-
 cp ./src/Data_Augmented_Training_hybrid.py $SCRATCH/Data_Augmented_Training_hybrid.py
+
+# I think this is the fix but I cant exactly remember the error msg
+echo "[$(date '+%y-%m-%d %H:%M:%S')] Copying source directory to scratch..."
+cp -r ./src $SCRATCH
 
 echo "[$(date '+%y-%m-%d %H:%M:%S')] Verify setup..."
 ls -lh $SCRATCH
