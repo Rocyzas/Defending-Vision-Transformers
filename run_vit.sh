@@ -36,7 +36,7 @@ python3 Data_Augmented_Training_vit.py \
     
 echo "[$(date '+%y-%m-%d %H:%M:%S')] Copy results to home directory..."
 cd $SCRATCH
-zip -r outputs.zip outputs
-cp outputs.zip ~
+zip -r outputs_vit.zip outputs
+cp outputs_vit.zip ~
 
 rm -rf $SCRATCH

@@ -36,7 +36,7 @@ python3 Data_Augmented_Training_hybrid.py \
     
 echo "[$(date '+%y-%m-%d %H:%M:%S')] Copy results to home directory..."
 cd $SCRATCH
-zip -r outputs.zip outputs
-cp outputs.zip ~
+zip -r outputs_hybrid.zip outputs
+cp outputs_hybrid.zip ~
 
 rm -rf $SCRATCH
