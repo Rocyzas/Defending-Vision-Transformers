@@ -1,2 +1,26 @@
 # Data
 data/
+data.zip
+
+# OS / Python cruft
+.DS_Store
+__pycache__/
+
+# TensorBoard runs
+runs/
+src/runs/
+
+# Notebooks
+src/ViT_Inspection.ipynb
+
+# Model checkpoints
+src/models_hybrid/
+src/models_new/
+src/models_vit/
+trained_clean_models/best_hybrid/
+trained_clean_models/outputs_hybrid_01/
+trained_clean_models/outputs_hybrid_02/
+trained_clean_models/outputs_hybrid_03/
+trained_clean_models/outputs_vit_01/
+trained_clean_models/outputs_vit_02/
+trained_clean_models/outputs_vit_03/
