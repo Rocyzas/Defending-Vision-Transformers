@@ -164,7 +164,7 @@ def main():
     attacks = [
         SquareAttack(estimator=classifier, eps=8/255, max_iter=args.max_iter, norm="inf", nb_restarts=1, verbose=True),
         # es=1 for DE algorithm
-        PixelAttack(classifier=classifier, th=1, es=0, max_iter=args.max_iter, targeted=False, verbose=True),
+        PixelAttack(classifier=classifier, th=1, es=1, max_iter=10, targeted=False, verbose=True),
         # ThresholdAttack(classifier=classifier, th=None, es=0, max_iter=args.max_iter, targeted=False, verbose=True),
         GreedyPixel(
             target = model,          # raw torch module: called directly, returns logit tensors
@@ -172,6 +172,7 @@ def main():
             eps = 8 / 255,          # L-inf budget in [0, 1] pixel space
             # max_query = args.max_query,
             early_stop = True,
+            batch_size = 128
             )
     ]
 
