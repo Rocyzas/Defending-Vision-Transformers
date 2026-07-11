@@ -33,7 +33,7 @@ echo "[$(date '+%y-%m-%d %H:%M:%S')] Copying GreedyPixel..."
 cp -r ./greedypixel $SCRATCH
 
 # COPYING MODELS
-echo "[$(date '+%y-%m-%d %H:%M:%S')] Copying GreedyPixel..."
+echo "[$(date '+%y-%m-%d %H:%M:%S')] Copying Models..."
 unzip -q ./best_hybrid.zip -d $SCRATCH/
 
 
