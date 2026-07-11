@@ -14,7 +14,8 @@ OUTPUTS_DIR=$SCRATCH/outputs
 mkdir -p $SCRATCH
 mkdir -p $OUTPUTS_DIR
 
-TARGET_MODEL=$SCRATCH/best_hybrid/best_vit_model_96x96_grid_patch_16x16_9_snp_fillup_0.1.pth
+MODELTYPE=hybrid
+TARGET_MODEL=$SCRATCH/best_${MODELTYPE}/best_vit_model_96x96_grid_patch_16x16_9_snp_fillup_0.1.pth
 
 echo "[$(date '+%y-%m-%d %H:%M:%S')] Unzipping Testing to scratch..."
 unzip -q ./Testing_new.zip -d $SCRATCH/
@@ -34,7 +35,7 @@ cp -r ./greedypixel $SCRATCH
 
 # COPYING MODELS
 echo "[$(date '+%y-%m-%d %H:%M:%S')] Copying Models..."
-unzip -q ./best_hybrid.zip -d $SCRATCH/
+unzip -q ./best_$MODELTYPE.zip -d $SCRATCH/
 
 
 echo "[$(date '+%y-%m-%d %H:%M:%S')] Verify setup..."
@@ -47,8 +48,11 @@ python3 attack_suite.py \
     $TARGET_MODEL \
     $SCRATCH/Testing \
     --max-samples 1
-    --output-csv ~/ViT_defense/Defending-Vision-Transformers/attack_results.csv
-    
+    # --output-csv ~/ViT_defense/Defending-Vision-Transformers/attack_results.csv
+
+
+echo "[$(date '+%y-%m-%d %H:%M:%S')] Copying attack_results from scratch to home directory..."
+cp -r $SCRATCH/attack_results.csv ~/ViT_defense/Defending-Vision-Transformers/attack_results_${MODELTYPE}_${TARGET_MODEL}.csv
 # echo "[$(date '+%y-%m-%d %H:%M:%S')] Copy results to home directory..."
 # cd $SCRATCH
 # zip -r outputs.zip outputs
