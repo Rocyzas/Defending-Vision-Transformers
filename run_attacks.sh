@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --job-name=attack_hybrid
+#SBATCH --job-name=attack
 #SBATCH -p Teaching
 #SBATCH --gres=gpu:1
 
@@ -14,8 +14,31 @@ OUTPUTS_DIR=$SCRATCH/outputs
 mkdir -p $SCRATCH
 mkdir -p $OUTPUTS_DIR
 
-MODELTYPE=hybrid
-TARGET_MODEL_NAME=best_vit_model_96x96_grid_patch_16x16_9_snp_fillup_0.1
+# MODELTYPE=hybrid
+# TARGET_MODEL_NAME=best_vit_model_96x96_grid_patch_16x16_9_snp_fillup_0.1
+
+# # ---- Defaults (used if the flag isn't passed) ----
+# MODELTYPE=hybrid
+# TARGET_MODEL_NAME=best_vit_model_96x96_grid_patch_16x16_9_snp_fillup_0.1
+
+# ---- Override from command-line flags ----
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --modelType)
+            MODELTYPE="$2"
+            shift 2
+            ;;
+        --TargetModelName)
+            TARGET_MODEL_NAME="$2"
+            shift 2
+            ;;
+        *)
+            echo "Unknown argument: $1" >&2
+            exit 1
+            ;;
+    esac
+done
+
 TARGET_MODEL=$SCRATCH/best_${MODELTYPE}/${TARGET_MODEL_NAME}.pth
 
 echo "[$(date '+%y-%m-%d %H:%M:%S')] Unzipping Testing to scratch..."
