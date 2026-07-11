@@ -165,7 +165,7 @@ def main():
 
     # ---- Define attacks ----
     attacks = [
-        SquareAttack(estimator=classifier, eps=4/255, max_iter=args.max_iter, norm="2", nb_restarts=1, verbose=True),
+        SquareAttack(estimator=classifier, eps=4/255, max_iter=args.max_iter, norm="inf", nb_restarts=1, verbose=True),
         # es=1 for DE algorithm
         # PixelAttack(classifier=classifier, th=1, es=1, max_iter=10, targeted=False, verbose=True),
         # ThresholdAttack(classifier=classifier, th=None, es=0, max_iter=args.max_iter, targeted=False, verbose=True),
