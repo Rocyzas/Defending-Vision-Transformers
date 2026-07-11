@@ -15,7 +15,8 @@ mkdir -p $SCRATCH
 mkdir -p $OUTPUTS_DIR
 
 MODELTYPE=hybrid
-TARGET_MODEL=$SCRATCH/best_${MODELTYPE}/best_vit_model_96x96_grid_patch_16x16_9_snp_fillup_0.1.pth
+TARGET_MODEL_NAME=best_vit_model_96x96_grid_patch_16x16_9_snp_fillup_0.1
+TARGET_MODEL=$SCRATCH/best_${MODELTYPE}/${TARGET_MODEL_NAME}.pth
 
 echo "[$(date '+%y-%m-%d %H:%M:%S')] Unzipping Testing to scratch..."
 unzip -q ./Testing_new.zip -d $SCRATCH/
@@ -52,7 +53,7 @@ python3 attack_suite.py \
 
 
 echo "[$(date '+%y-%m-%d %H:%M:%S')] Copying attack_results from scratch to home directory..."
-cp -r $SCRATCH/attack_results.csv ~/ViT_defense/Defending-Vision-Transformers/attack_results_${MODELTYPE}_${TARGET_MODEL}.csv
+cp -r $SCRATCH/attack_results.csv ~/ViT_defense/Defending-Vision-Transformers/attack_results_${MODELTYPE}_${TARGET_MODEL_NAME}.csv
 # echo "[$(date '+%y-%m-%d %H:%M:%S')] Copy results to home directory..."
 # cd $SCRATCH
 # zip -r outputs.zip outputs
