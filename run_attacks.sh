@@ -44,8 +44,8 @@ echo "[$(date '+%y-%m-%d %H:%M:%S')] Starting attacking a single model - $TARGET
 #python3 $SCRATCH/Data_Augmented_Training_hybrid.py --data $SCRATCH/data/dataset.csv --models $OUTPUTS_DIR
 cd $SCRATCH
 python3 attack_suite.py \
-    --model_path $TARGET_MODEL \
-    --test_dir $SCRATCH/Testing_new \
+    $TARGET_MODEL \
+    $SCRATCH/Testing \
     --max-samples 1
     --output-csv ~/ViT_defense/Defending-Vision-Transformers/attack_results.csv
     
