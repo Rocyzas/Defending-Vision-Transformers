@@ -18,6 +18,9 @@ from greedypixel.greedypixel import GreedyPixel
 
 from src.model import *
 
+import warnings
+warnings.filterwarnings("ignore", message="function_values is not a list of scalars")
+
 
 # ImageNet statistics the model was trained with (see Data_Augmented_Training_hybrid.py)
 IMAGENET_MEAN = [0.485, 0.456, 0.406]
@@ -172,7 +175,7 @@ def main():
             eps = 8 / 255,          # L-inf budget in [0, 1] pixel space
             # max_query = args.max_query,
             early_stop = True,
-            batch_size = 128
+            # batch_size = 128
             )
     ]
 
